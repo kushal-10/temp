@@ -46,7 +46,7 @@ class AgentRag:
             LlmChatInput(messages=self.messages, system_content=system_content),
             start_to_close_timeout=timedelta(seconds=120),
         )
-
+        # temp
         log.info(f"completion: {completion}")
 
         self.messages.append(
