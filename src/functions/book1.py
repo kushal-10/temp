@@ -31,7 +31,7 @@ async def lookup_book(query: str) -> list[Book1]:
         log.info("lookup_book function started")
         if not query or not isinstance(query, str):
             raise ValueError("Query input must be a non-empty string")
-                # Get the collection
+            # Get the collection
         books_collection = client.collections.get("Book")
 
         # Perform query
