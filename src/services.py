@@ -4,15 +4,13 @@ from watchfiles import run_process
 import webbrowser
 from src.client import client
 from src.functions.book1 import lookup_book
-from src.functions.llm_chat import llm_chat
-
-from src.workflows.pdf import PdfWorkflow 
+from src.functions.llm_chat import llm_chat 
 
 from src.agents.chat_rag import AgentRag
 
 
 async def main():
-    await client.start_service(agents=[AgentRag], functions=[lookup_book, llm_chat], workflows=[PdfWorkflow])
+    await client.start_service(agents=[AgentRag], functions=[lookup_book, llm_chat])
 
 
 def run_services():

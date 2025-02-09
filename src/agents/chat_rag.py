@@ -12,10 +12,14 @@ def create_query(message):
     except Exception as e:
         log.error(f"Error in create_query: {e}")
         return ""
+    
+# def create_query(message):
+
+#     return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant passages from the book."
+
 
 with import_functions():
     from src.functions.llm_chat import llm_chat, LlmChatInput, Message
-    from src.functions.lookup_sales import lookupSales
     from src.functions.book1 import lookup_book
 
 
