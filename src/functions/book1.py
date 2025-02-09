@@ -36,7 +36,7 @@ async def lookup_book(query: str) -> list[Book1]:
 
         # Perform query
         response = books_collection.query.near_text(
-            query=query, limit=1000, return_metadata=wq.MetadataQuery(distance=True)
+            query=query, limit=50, return_metadata=wq.MetadataQuery(distance=True)
         )
 
         # Store results in Book1 instances
