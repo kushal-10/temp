@@ -48,8 +48,5 @@ async def lookup_book(query: str) -> list[Book1]:
         log.error("lookup_book function failed", exc_info=True)
         raise e
 
-    finally:
-        client.close()  # Close the client connection
-
 if __name__ == "__main__":
     asyncio.run(lookup_book())
