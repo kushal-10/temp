@@ -100,3 +100,4 @@ websockets==14.2
     # via restack-ai
 yarl==1.18.3
     # via aiohttp
+weaviate-client==4.10.4
