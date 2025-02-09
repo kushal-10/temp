@@ -3,11 +3,11 @@ from typing import List
 from pydantic import BaseModel
 from restack_ai.agent import agent, import_functions, log
 
-# def create_query(message):
-#     if not message.chapters:
-#         return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant chapters from the book."
-#     else:
-#         return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant passages from the book. Here are the chapters: {message.chapters}"
+def create_query(message):
+    if not message.chapters:
+        return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant chapters from the book."
+    else:
+        return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant passages from the book. Here are the chapters: {message.chapters}"
 
 with import_functions():
     from src.functions.llm_chat import llm_chat, LlmChatInput, Message
@@ -34,10 +34,10 @@ class AgentRag:
         log.info(f"Received message: {message.content}")
 
         book_info = await agent.step(
-            lookup_book(message.content), start_to_close_timeout=timedelta(seconds=120)
+            lookup_book(create_query(message)), start_to_close_timeout=timedelta(seconds=120)
         )
 
-        system_content = f"You are a helpful assistant given a goal, a timeline and relevant chapters from a book {book_info}, Given these three things, generate a JSON file with an action plan."
+        system_content = f"You are a helpful assistant given a goal {message.goal}, a timeline {message.timeline} and relevant chapters from a book {book_info}, Given these three things, generate a JSON file with an action plan. The output should be in JSON format. The JSON should have following fields - day, goal, and action. The day is number of day from the timeline - Day 1, Day 2 etc.. The goal should contain a specific subgoal based on the original goal. The action should contain an achievable task that can be done towards goal of the day."
 
         self.messages.append(Message(role="user", content=message.content or ""))
 
