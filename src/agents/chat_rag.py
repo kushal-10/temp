@@ -41,9 +41,14 @@ class AgentRag:
     async def message(self, message: MessageEvent) -> List[Message]:
         log.info(f"Received message: {message.content}")
 
+        query = create_query(message)
+
         book_info = await agent.step(
-            lookup_book(create_query(message)), start_to_close_timeout=timedelta(seconds=120)
+            lookup_book,
+            query,
+            start_to_close_timeout=timedelta(seconds=120)
         )
+
 
         system_content = f"You are a helpful assistant given a goal {message.goal}, a timeline {message.timeline} and relevant chapters from a book {book_info}, Given these three things, generate a JSON file with an action plan. The output should be in JSON format. The JSON should have following fields - day, goal, and action. The day is number of day from the timeline - Day 1, Day 2 etc.. The goal should contain a specific subgoal based on the original goal. The action should contain an achievable task that can be done towards goal of the day."
 
