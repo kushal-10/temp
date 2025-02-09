@@ -4,14 +4,8 @@ from pydantic import BaseModel
 from restack_ai.agent import agent, import_functions, log
 
 def create_query(message):
-    try:
-        if not message.chapters:
-            return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant chapters from the book."
-        else:
-            return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant passages from the book. Here are the chapters: {message.chapters}"
-    except Exception as e:
-        log.error(f"Error in create_query: {e}")
-        return ""
+    return f"This is my goal - {message.goal}, this this the expected timeline - {message.timeline}. Based on this information, find the relevant chapters from the book."
+        
     
 # def create_query(message):
 

@@ -29,8 +29,9 @@ class Book1(BaseModel):
 async def lookup_book(query: str) -> list[Book1]:
     try:
         log.info("lookup_book function started")
-
-        # Get the collection
+        if not query or not isinstance(query, str):
+            raise ValueError("Query input must be a non-empty string")
+                # Get the collection
         books_collection = client.collections.get("Book")
 
         # Perform query
