@@ -45,7 +45,6 @@ class AgentRag:
         print(f"query: {query}")
         book_info = await agent.step(
             lookup_book,
-            query,
             start_to_close_timeout=timedelta(seconds=120)
         )
 

@@ -26,7 +26,7 @@ class Book1(BaseModel):
 
 # Function to look up books
 @function.defn
-async def lookup_book(query: str) -> list[Book1]:
+async def lookup_book() -> list[Book1]:
     try:
         log.info("lookup_book function started")
         if not query or not isinstance(query, str):
